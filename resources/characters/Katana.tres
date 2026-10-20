@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Character" load_steps=19 format=3]
+
+[ext_resource type="Script" path="res://scripts/core/Character.gd" id="1"]
+[ext_resource type="Resource" path="res://resources/characters/Katana_stats.tres" id="2"]
+[ext_resource type="PackedScene" path="res://prefabs/characters/KatanaFighter.tscn" id="3"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_Jab.tres" id="4"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_ForwardTilt.tres" id="5"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_UpTilt.tres" id="6"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_DownTilt.tres" id="7"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_ForwardSmash.tres" id="8"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_UpSmash.tres" id="9"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_DownSmash.tres" id="10"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_NeutralAir.tres" id="11"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_ForwardAir.tres" id="12"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_BackAir.tres" id="13"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_UpAir.tres" id="14"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_DownAir.tres" id="15"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_QuickDrawSlash.tres" id="16"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_IaidoLunge.tres" id="17"]
+[ext_resource type="Resource" path="res://resources/moves/Katana_ParryRiposte.tres" id="18"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Hayato"
+character_id = "hayato"
+player_color = Color(0.75, 0.18, 0.14, 1)
+weapon_label = "Katana"
+weapon_length = 76.0
+weapon_thickness = 4.0
+offhand_weapon_length = 0.0
+weapon_is_polearm = false
+player_scene = ExtResource("3")
+dummy_scene = ExtResource("3")
+stats = ExtResource("2")
+moves = Array[Resource]([ExtResource("4"), ExtResource("5"), ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("11"), ExtResource("12"), ExtResource("13"), ExtResource("14"), ExtResource("15"), ExtResource("16"), ExtResource("17"), ExtResource("18")])
+signature_move = ExtResource("16")
+damage_multiplier = 0.94
+starting_stocks = 3

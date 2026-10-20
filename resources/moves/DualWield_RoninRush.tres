@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="MoveData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/core/MoveData.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/core/HitboxData.gd" id="2"]
+
+[sub_resource type="Resource" id="HitA"]
+script = ExtResource("2")
+hitbox_name = "Rush hit one"
+size = Vector2(70, 50)
+offset = Vector2(48, -35)
+shape = 1
+damage = 3.2
+knockback_base = 70.0
+knockback_scaling = 1.4
+knockback_angle = 0.0
+active_start_frame = 8
+active_end_frame = 11
+
+[sub_resource type="Resource" id="HitB"]
+script = ExtResource("2")
+hitbox_name = "Rush hit two"
+size = Vector2(72, 52)
+offset = Vector2(52, -35)
+shape = 1
+damage = 3.2
+knockback_base = 72.0
+knockback_scaling = 1.4
+knockback_angle = 0.0
+active_start_frame = 11
+active_end_frame = 14
+
+[sub_resource type="Resource" id="Launcher"]
+script = ExtResource("2")
+hitbox_name = "Rush launcher"
+size = Vector2(86, 66)
+offset = Vector2(57, -40)
+shape = 1
+damage = 9.0
+knockback_base = 240.0
+knockback_scaling = 3.3
+knockback_angle = 58.0
+active_start_frame = 14
+active_end_frame = 17
+hitstop = 0.12
+shake_intensity = 1.6
+
+[resource]
+script = ExtResource("1")
+move_name = "Ronin Rush"
+category = 4
+is_signature = true
+input_command = "SpecialSide"
+startup_frames = 8
+active_frames = 9
+recovery_frames = 25
+hitboxes = Array[ExtResource("2")]([SubResource("HitA"), SubResource("HitB"), SubResource("Launcher")])
+dash_velocity = 240.0
+usable_in_air = true

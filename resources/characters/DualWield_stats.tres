@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/core/CharacterStats.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+walk_speed = 360
+air_acceleration = 920
+max_air_speed = 440
+ground_friction = 1700
+jump_velocity = -650
+max_jumps = 2
+fall_gravity = 1680
+fast_fall_gravity = 2400
+max_fall_speed = 1020
+weight = 1.1
+hurtbox_radius = 28.0
+tech_window = 0.12
+ledge_grab_distance = 54.0
+ledge_hold_time = 1.5

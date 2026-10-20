@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Character" load_steps=19 format=3]
+
+[ext_resource type="Script" path="res://scripts/core/Character.gd" id="1"]
+[ext_resource type="Resource" path="res://resources/characters/Nodachi_stats.tres" id="2"]
+[ext_resource type="PackedScene" path="res://prefabs/characters/NodachiFighter.tscn" id="3"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_Jab.tres" id="4"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_ForwardTilt.tres" id="5"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_UpTilt.tres" id="6"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_DownTilt.tres" id="7"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_ForwardSmash.tres" id="8"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_UpSmash.tres" id="9"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_DownSmash.tres" id="10"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_NeutralAir.tres" id="11"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_ForwardAir.tres" id="12"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_BackAir.tres" id="13"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_UpAir.tres" id="14"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_DownAir.tres" id="15"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_MountainBreaker.tres" id="16"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_IronAdvance.tres" id="17"]
+[ext_resource type="Resource" path="res://resources/moves/Nodachi_HeavenSplitter.tres" id="18"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Takeshi"
+character_id = "takeshi"
+player_color = Color(0.72, 0.50, 0.20, 1)
+weapon_label = "Nodachi"
+weapon_length = 94.0
+weapon_thickness = 7.0
+offhand_weapon_length = 0.0
+weapon_is_polearm = false
+player_scene = ExtResource("3")
+dummy_scene = ExtResource("3")
+stats = ExtResource("2")
+moves = Array[Resource]([ExtResource("4"), ExtResource("5"), ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("11"), ExtResource("12"), ExtResource("13"), ExtResource("14"), ExtResource("15"), ExtResource("16"), ExtResource("17"), ExtResource("18")])
+signature_move = ExtResource("18")
+damage_multiplier = 1.28
+starting_stocks = 3

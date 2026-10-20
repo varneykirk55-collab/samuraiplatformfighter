@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="MoveData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/core/MoveData.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/core/HitboxData.gd" id="2"]
+
+[sub_resource type="Resource" id="HitboxData"]
+script = ExtResource("2")
+hitbox_name = "QuickDrawSlash hit"
+size = Vector2(104.16, 75.00)
+offset = Vector2(39.06, -35.00)
+shape = 1
+damage = 14.18
+knockback_base = 39.48
+knockback_scaling = 2.8
+knockback_angle = 0
+hitstop = 0.11
+shake_intensity = 1.6
+
+[resource]
+script = ExtResource("1")
+move_name = "QuickDrawSlash"
+category = 4
+is_signature = true
+input_command = "SpecialNeutral"
+startup_frames = 6
+active_frames = 4
+recovery_frames = 17
+charge_frames = 45
+charge_damage_multiplier = 1.8
+charge_knockback_multiplier = 1.65
+hitboxes = Array[ExtResource("2")]([SubResource("HitboxData")])
+dash_velocity = 0
+launch_velocity = 0.0
+ignore_gravity = false
+usable_in_air = true
+usable_from_ledge = false
+face_target_on_start = false

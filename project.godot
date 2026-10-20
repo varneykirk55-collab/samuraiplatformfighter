@@ -1,0 +1,34 @@
+config_version=5
+
+[application]
+config/name="Samurai Platform Fighter"
+config/description="A data-driven local 1v1 samurai platform fighter."
+config/features=PackedStringArray("4.3", "GL Compatibility")
+run/main_scene="res://scenes/MainMenu.tscn"
+
+[autoload]
+HitManager="*res://scripts/core/HitManager.gd"
+MatchManager="*res://scripts/MatchManager.gd"
+InputManager="*res://scripts/InputManager.gd"
+FightCamera="*res://scripts/Camera.gd"
+
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+
+[physics]
+2d/default_gravity=1700.0
+2d/physics_ticks_per_second=60
+common/physics_ticks_per_second=60
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+environment/defaults/default_clear_color=Color(0.0392157, 0.0470588, 0.0705882, 1)
+
+[gui]
+theme/default_font_multichannel_signed_distance_field=true
