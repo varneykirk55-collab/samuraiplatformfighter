@@ -33,7 +33,6 @@ func _add_ledge(at: Vector2) -> void:
 
 
 func _draw() -> void:
-	var view := get_viewport_rect().size
 	# Deep charcoal-blue night backdrop, moon and distant rooftops.
 	draw_rect(Rect2(-1500, -1100, 3000, 1500), Color("171b29"))
 	draw_circle(Vector2(370, -520), 105, Color("d7c7a4", 0.18))

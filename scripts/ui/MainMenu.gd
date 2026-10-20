@@ -89,12 +89,10 @@ func _open_setup(training: bool) -> void:
 	training_selected = training
 	menu_panel.hide()
 	setup_panel.show()
-	setup_panel.get_node("VBoxContainer/SetupTitle").text = (
-		"TRAINING SETUP" if training else "VERSUS SETUP"
-	)
-	setup_panel.get_node("VBoxContainer/StartButton").text = (
-		"START TRAINING" if training else "START VERSUS MATCH"
-	)
+	var setup_title := setup_panel.get_node("VBoxContainer/SetupTitle") as Label
+	var start_button := setup_panel.get_node("VBoxContainer/StartButton") as Button
+	setup_title.text = "TRAINING SETUP" if training else "VERSUS SETUP"
+	start_button.text = "START TRAINING" if training else "START VERSUS MATCH"
 	_update_pad_label()
 
 
@@ -112,7 +110,8 @@ func _toggle_single_pad() -> void:
 
 func _update_pad_label() -> void:
 	var slot_name := "PLAYER 1" if InputManager.single_gamepad_player == 0 else "PLAYER 2"
-	setup_panel.get_node("VBoxContainer/PadAssignment").text = "ONE GAMEPAD → %s" % slot_name
+	var pad_button := setup_panel.get_node("VBoxContainer/PadAssignment") as Button
+	pad_button.text = "ONE GAMEPAD → %s" % slot_name
 
 
 func _add_pick_row(parent: VBoxContainer, slot: int, caption: String) -> Label:
@@ -141,7 +140,7 @@ func _add_pick_row(parent: VBoxContainer, slot: int, caption: String) -> Label:
 
 
 func _cycle(slot: int, direction: int) -> void:
-	var roster_size := MatchManager.CHARACTERS.size()
+	var roster_size := MatchManager.characters.size()
 	MatchManager.character_indices[slot] = posmod(
 		MatchManager.character_indices[slot] + direction, roster_size
 	)
@@ -151,8 +150,8 @@ func _cycle(slot: int, direction: int) -> void:
 func refresh() -> void:
 	if not is_instance_valid(p1_label):
 		return
-	p1_label.text = MatchManager.CHARACTERS[MatchManager.character_indices[0]].display_name
-	p2_label.text = MatchManager.CHARACTERS[MatchManager.character_indices[1]].display_name
+	p1_label.text = MatchManager.characters[MatchManager.character_indices[0]].display_name
+	p2_label.text = MatchManager.characters[MatchManager.character_indices[1]].display_name
 
 
 func _panel(position: Vector2, size: Vector2) -> PanelContainer:

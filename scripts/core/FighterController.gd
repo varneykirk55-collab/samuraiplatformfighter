@@ -417,7 +417,10 @@ func _check_ledge_grab() -> void:
 		or current_state in [FighterState.State.ATTACK, FighterState.State.LEDGE]
 	):
 		return
-	for ledge in get_tree().get_nodes_in_group("ledges"):
+	for ledge_node in get_tree().get_nodes_in_group("ledges"):
+		var ledge := ledge_node as Node2D
+		if ledge == null:
+			continue
 		var distance := (
 			character.stats.ledge_grab_distance if character and character.stats else 54.0
 		)

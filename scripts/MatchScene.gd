@@ -7,5 +7,5 @@ func _ready() -> void:
 
 func _begin() -> void:
 	MatchManager.begin_round()
-	var camera := $Camera2D
+	var camera := get_node("Camera2D") as Camera2D
 	camera.enabled = true

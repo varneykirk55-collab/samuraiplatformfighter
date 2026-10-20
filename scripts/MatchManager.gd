@@ -5,14 +5,16 @@ signal match_state_changed
 signal round_ended(winner_index: int)
 signal match_ended(winner_index: int)
 
-const MATCH_SCENE := preload("res://scenes/Match.tscn")
-const TRAINING_SCENE := preload("res://scenes/Training.tscn")
-const CHARACTERS := [
-	preload("res://resources/characters/Katana.tres"),
-	preload("res://resources/characters/Naginata.tres"),
-	preload("res://resources/characters/DualWield.tres"),
-	preload("res://resources/characters/Nodachi.tres")
+const MATCH_SCENE_PATH := "res://scenes/Match.tscn"
+const TRAINING_SCENE_PATH := "res://scenes/Training.tscn"
+const CHARACTER_PATHS := [
+	"res://resources/characters/Katana.tres",
+	"res://resources/characters/Naginata.tres",
+	"res://resources/characters/DualWield.tres",
+	"res://resources/characters/Nodachi.tres"
 ]
+
+var characters: Array[Character] = []
 
 var character_indices := [0, 3]
 var fighter1: FighterController
@@ -31,6 +33,15 @@ var stocks_per_round := 3
 var round_reset_pending := false
 
 
+func _ready() -> void:
+	for character_path in CHARACTER_PATHS:
+		var character_resource := load(character_path) as Character
+		if character_resource:
+			characters.append(character_resource)
+	if characters.size() != CHARACTER_PATHS.size():
+		push_error("MatchManager failed to load the full fighter roster.")
+
+
 func _process(delta: float) -> void:
 	if paused or match_over or training_mode or round_reset_pending or sudden_death:
 		return
@@ -44,13 +55,13 @@ func _process(delta: float) -> void:
 func start_versus() -> void:
 	_reset_session()
 	training_mode = false
-	get_tree().change_scene_to_packed(MATCH_SCENE)
+	get_tree().change_scene_to_file(MATCH_SCENE_PATH)
 
 
 func start_training() -> void:
 	_reset_session()
 	training_mode = true
-	get_tree().change_scene_to_packed(TRAINING_SCENE)
+	get_tree().change_scene_to_file(TRAINING_SCENE_PATH)
 
 
 func _reset_session() -> void:
@@ -83,11 +94,15 @@ func _spawn_fighter(slot: int, pos: Vector2, face: int, dummy: bool) -> FighterC
 	var old := fighter1 if slot == 0 else fighter2
 	if is_instance_valid(old):
 		old.queue_free()
-	var data: Character = CHARACTERS[character_indices[slot] % CHARACTERS.size()]
+	var data: Character = characters[character_indices[slot] % characters.size()]
 	var scene := data.player_scene
-	var fighter: FighterController = (
-		scene.instantiate() if scene else preload("res://scenes/Fighter.tscn").instantiate()
-	)
+	var fighter_scene: PackedScene = scene
+	if fighter_scene == null:
+		fighter_scene = load("res://scenes/Fighter.tscn") as PackedScene
+	var fighter := fighter_scene.instantiate() as FighterController
+	if fighter == null:
+		push_error("Fighter scene root must have a FighterController script.")
+		return null
 	fighter.character = data
 	fighter.player_index = slot
 	fighter.is_dummy = dummy

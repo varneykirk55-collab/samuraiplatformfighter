@@ -55,19 +55,23 @@ func _build() -> void:
 	line.add_child(p2_readout)
 
 	pause_panel = _center_panel(root, "PAUSED", ["RESUME", "RETURN TO MENU"])
-	var pause_buttons: VBoxContainer = pause_panel.get_node("Margin/VBox")
-	pause_buttons.get_child(1).pressed.connect(
+	var pause_buttons := pause_panel.get_node("Margin/VBox") as VBoxContainer
+	var resume_button := pause_buttons.get_child(1) as Button
+	var pause_menu_button := pause_buttons.get_child(2) as Button
+	resume_button.pressed.connect(
 		func():
 			MatchManager.toggle_pause()
 			pause_panel.hide()
 	)
-	pause_buttons.get_child(2).pressed.connect(_return_to_menu)
+	pause_menu_button.pressed.connect(_return_to_menu)
 	pause_panel.hide()
 
 	results_panel = _center_panel(root, "MATCH OVER", ["REMATCH", "MAIN MENU"])
-	var result_buttons: VBoxContainer = results_panel.get_node("Margin/VBox")
-	result_buttons.get_child(1).pressed.connect(_rematch)
-	result_buttons.get_child(2).pressed.connect(_return_to_menu)
+	var result_buttons := results_panel.get_node("Margin/VBox") as VBoxContainer
+	var rematch_button := result_buttons.get_child(1) as Button
+	var results_menu_button := result_buttons.get_child(2) as Button
+	rematch_button.pressed.connect(_rematch)
+	results_menu_button.pressed.connect(_return_to_menu)
 	results_panel.hide()
 
 	if MatchManager.training_mode:
@@ -93,6 +97,7 @@ func _center_panel(parent: Control, heading: String, buttons: Array) -> PanelCon
 	vbox.add_theme_constant_override("separation", 14)
 	margin.add_child(vbox)
 	var title := _label(heading, 28)
+	title.name = "Title"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(title)
 	for text in buttons:
@@ -166,8 +171,10 @@ func _spinbox(value: float) -> SpinBox:
 
 
 func _toggle_debug(enabled: bool) -> void:
-	for fighter in get_tree().get_nodes_in_group("fighters"):
-		fighter.show_debug = enabled
+	for fighter_node in get_tree().get_nodes_in_group("fighters"):
+		var fighter := fighter_node as FighterController
+		if fighter:
+			fighter.show_debug = enabled
 
 
 func _refresh() -> void:
@@ -208,7 +215,8 @@ func _sync_panels() -> void:
 
 func _show_result(winner: int) -> void:
 	results_panel.show()
-	results_panel.get_node("Margin/VBox").get_child(0).text = "PLAYER %d WINS" % winner
+	var title := results_panel.get_node("Margin/VBox/Title") as Label
+	title.text = "PLAYER %d WINS" % winner
 
 
 func _rematch() -> void:
